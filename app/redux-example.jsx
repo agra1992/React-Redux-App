@@ -15,7 +15,16 @@ var reducer = (state = {name: 'NA'}, action) => {
 	}
 };
 
-var store = redux.createStore(reducer);
+var store = redux.createStore(reducer, redux.compose(
+	window.devToolsExtension ? window.devToolsExtension() : f => f	//(f) => { return f; }
+));
+
+//Subscribe to changes
+var unsubscribe = store.subscribe(() => {
+	var state = store.getState();
+	console.log('Name is: ', state.name);
+});
+
 
 var currentState = store.getState();
 
@@ -26,4 +35,9 @@ store.dispatch({
 	name: 'AK'
 });
 
-console.log('new status', store.getState());
+//unsubscribe();
+
+store.dispatch({
+	type: 'CHANGE_NAME',
+	name: 'Emily'
+});
