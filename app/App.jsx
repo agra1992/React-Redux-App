@@ -12,3 +12,5 @@ ReactDOM.render(
 	<h1>ReactJS Boilerplate App</h1>,
 	document.getElementById('app')
 );
+
+require('./redux-example.jsx');
